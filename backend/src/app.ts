@@ -2,13 +2,22 @@ import express from 'express';
 import cors from 'cors';
 import apiRoutes from './routes';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 
-
-const app = express();
+ export const app = express();
 
 dotenv.config();
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
+app.use(cors({
+  origin: [
+    'http://localhost:5173',  
+    'http://localhost:3000',  
+  ],
+  credentials: true,  
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Montar todas las rutas bajo /api
 app.use('/api', apiRoutes);

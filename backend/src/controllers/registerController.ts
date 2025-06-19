@@ -36,6 +36,7 @@ export const registerController = async (req: Request<{}, {}, RegisterRequestBod
       'INSERT INTO users (email, password, auth) VALUES (?, ?, ?)', 
       [email, password, true] 
     );
+
     
     res.status(201).json({ 
       message: 'User registered successfully', 

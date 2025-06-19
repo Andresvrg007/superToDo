@@ -51,14 +51,12 @@ export const loginController=async (req: Request<{},{},LoginRequestBody>, res: R
                         email,           
                         auth: true              
                     },
-                    process.env.JWT_SECRET!,
-                    { expiresIn: '1h' });
+                    process.env.JWT_SECRET!);
 
                     // Set the token in a cookie
                     res.cookie('user', token, {
                     httpOnly: true,
-                    secure: process.env.NODE_ENV === 'production',
-                    maxAge: 3600000 // 1 hour
+                    secure: process.env.NODE_ENV === 'production'
                     });
                     
                     res.status(200).json({message: 'Login successful', id:user.id});
