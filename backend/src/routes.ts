@@ -19,4 +19,5 @@ router.post('/daily-task', createDailyTaskController);
 router.get('/daily-tasks', getDailyTasksController);
 router.delete('/daily-task/:id', deleteDailyTaskController);
 
+
 export default router;

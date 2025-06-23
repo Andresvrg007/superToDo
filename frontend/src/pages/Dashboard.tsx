@@ -18,6 +18,8 @@ export const Dashboard = () => {
     const [activeSection, setActiveSection] = useState('daily');
     const [dailyTasks, setDailyTasks] = useState<Task[]>([]); 
     const [showComponent, setShowComponent] = useState(false);
+   
+    
     
 
     useEffect(() => {
@@ -46,6 +48,7 @@ export const Dashboard = () => {
                 }
                 else{
                     const data = await res.json();
+                    //setId
                     setDailyTasks(data);
                 }
             }
@@ -78,7 +81,7 @@ export const Dashboard = () => {
   
   const getSectionTitle = () => {
     switch (activeSection) {
-      case 'daily': return 'Daily Tasks';
+      case 'daily': return `Daily Tasks , ${new Date().toLocaleDateString()}`;
       case 'favorites': return 'Favorites';
       case 'infinite': return 'Infinite Tasks';
       default: return 'Tasks';
@@ -168,7 +171,7 @@ export const Dashboard = () => {
                   <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  Daily Tasks
+                  Daily Tasks 
                 </button>
                 
                 <button 
@@ -223,7 +226,7 @@ export const Dashboard = () => {
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-medium text-gray-900">{getSectionTitle()}</h2>
               
-              {/* ✅ Botón limpio sin el modal dentro */}
+              
               <button 
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" 
                 onClick={handleAddTask}
@@ -241,7 +244,7 @@ export const Dashboard = () => {
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
               
               {activeSection === 'daily' ? (
-                <DailyTasks dailyTasks={dailyTasks}/>
+                <DailyTasks dailyTasks={dailyTasks} setDailyTasks={setDailyTasks}/>
               ) : (
                 <p className="text-gray-500 text-center py-12">
                   Your {getSectionTitle().toLowerCase()} will appear here...

@@ -95,7 +95,7 @@ export const deleteDailyTaskController = async (req: Request, res: Response): Pr
             return;
         }
 
-        res.status(200).json({ message: 'Task deleted successfully' });
+        res.status(200).json({ message: 'Task deleted successfully', result: result });
     } catch (error) {
         res.status(500).json({ message: 'Error deleting task' });
     }
